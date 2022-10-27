@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 const defaultEndpoint = `https://jsonplaceholder.typicode.com/users`;
 
@@ -41,9 +42,11 @@ export default function Home({ data }) {
 
             return (
               <li key={id} className={styles.card}>
-                <a href="">
-                  <h2>{ name }</h2>
-                </a>
+                <Link legacyBehavior href="/user/[userId]" as={`/user/${id}`}>
+                  <a>
+                    <h2>{ name }</h2>
+                  </a>
+                </Link>
               </li>
             )
           })} 
