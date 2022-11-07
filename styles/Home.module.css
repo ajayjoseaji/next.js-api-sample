@@ -33,6 +33,16 @@
   text-decoration: none;
 }
 
+.link {
+  /* color: #0070f3; */
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #0070f3;
+  text-decoration: none;
+}
+
 .title a:hover,
 .title a:focus,
 .title a:active {
@@ -112,6 +122,10 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.search {
+  margin: 00.5rem;
 }
 
 @media (max-width: 600px) {

@@ -64,7 +64,7 @@ export default function User({ data, data1 }) {
         <p>
         <div className={styles.backToHome}>
           <Link legacyBehavior href="/">
-            <a>← Back</a>
+            <a className={styles.link}>← Back</a>
           </Link>
         </div>
         </p>

@@ -2,22 +2,51 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import { useEffect, useState } from 'react';
 
 const defaultEndpoint = `https://jsonplaceholder.typicode.com/users`;
 
-export async function getServerSideProps() {
-  const res = await fetch(defaultEndpoint)
-  const data = await res.json();
-  return {
-    props: {
-      data
-    }
-  }
-}
+// export async function getServerSideProps() {
+//   const res = await fetch(defaultEndpoint)
+//   const data = await res.json();
+//   return {
+//     props: {
+//       data
+//     }
+//   }
+// }
 
-export default function Home({ data }) {
-  // const { results = []} = data;
-  console.log(data)
+export default function Home() {
+  const [names, setNames] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filterValue, setFilterValue] = useState([]);
+ 
+  
+  useEffect(() => {
+     setLoading(true);
+     fetch(`${defaultEndpoint}`)
+       .then((res) => res.json())
+       .then((data) => {
+          setNames(data);
+          setLoading(false);
+       })
+   }, []);
+ 
+  
+   useEffect(() => {
+      setFilterValue(
+        names.filter((user) =>
+          user.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+   }, [search, names]);
+ 
+   if (loading) {
+     return <div>Loading...</div>;
+   }
+ 
+
   return (
     <div className={styles.container}>
       <Head>
@@ -31,13 +60,13 @@ export default function Home({ data }) {
           Sample API Project
         </h1>
 
-        <p className={styles.description}>
-          Ajay Jose A
-          {/* <code className={styles.code}>pages/index.js</code> */}
-        </p>
+        <form className={styles.search} >
+          <input placeholder='Search' onChange={(e) => setSearch(e.target.value)}/>
+          <button>Search</button>
+        </form>
 
         <ul className={styles.grid}>
-          {data.map(data => {
+          {filterValue.map(data => {
             const { id , name } = data;
 
             return (
