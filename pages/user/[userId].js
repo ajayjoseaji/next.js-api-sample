@@ -34,7 +34,7 @@ export default function User({ data, data1 }) {
       </Head>
 
       <main className={styles.main}>
-      <Image src={data1.data.avatar} width={150} height={150} alt=""  />
+      <Image className={styles.image} src={data1.data.avatar} width={150} height={150} alt=""  />
         <h1 className={styles.title}>
           {name}
         </h1>
